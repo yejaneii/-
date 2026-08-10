@@ -1,0 +1,17 @@
+{
+  "name": "used-trader-game",
+  "version": "1.0.0",
+  "description": "A low-poly browser game prototype about secondhand trading, item inspection, and anomaly route checks.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "lucide": "^1.30.0",
+    "three": "^0.185.1",
+    "vite": "^8.2.1"
+  }
+}

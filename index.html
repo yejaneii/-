@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secondhand King</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">₩</span>
+          <div>
+            <h1>Secondhand King</h1>
+            <p>From street mat to station landlord</p>
+          </div>
+        </div>
+        <div class="stats" aria-live="polite">
+          <span><i data-lucide="calendar-days"></i> Day <b id="dayStat">1</b></span>
+          <span><i data-lucide="wallet"></i> <b id="cashStat">₩0</b></span>
+          <span><i data-lucide="heart"></i> <b id="heartStat">100</b></span>
+          <button id="chatTopButton" class="icon-button" title="Open seller chat" aria-label="Open seller chat">
+            <i data-lucide="message-circle"></i>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section id="marketScreen" class="screen screen-market active" aria-label="Market screen">
+          <aside class="market-left">
+            <div class="mode-row" role="tablist" aria-label="Trade mode">
+              <button class="mode-button active" data-mode="computer"><i data-lucide="bot"></i> Computer</button>
+              <button class="mode-button" data-mode="players"><i data-lucide="users"></i> Players</button>
+            </div>
+
+            <div class="home-strip">
+              <img src="assets/route-calm.webp" alt="Apartment path concept art" />
+              <div>
+                <span class="eyebrow">Home base</span>
+                <strong id="rankLabel">Cardboard mat</strong>
+                <p id="dailyNote">Rice costs ₩3,000 at the end of each day.</p>
+              </div>
+            </div>
+
+            <div id="bagPanel" class="bag-panel hidden">
+              <div>
+                <span class="eyebrow">In your bag</span>
+                <strong id="bagName"></strong>
+                <p id="bagMeta"></p>
+              </div>
+              <div class="button-row">
+                <button id="meetAgainButton"><i data-lucide="navigation"></i> Meet buyer</button>
+                <button id="quickSellButton" class="ghost"><i data-lucide="coins"></i> Quick sell</button>
+              </div>
+            </div>
+
+            <div>
+              <div class="section-title">
+                <h2>Seller Posts</h2>
+                <span id="offerCount"></span>
+              </div>
+              <div id="offerList" class="offer-list"></div>
+            </div>
+          </aside>
+
+          <section class="inspection-area">
+            <div class="trade-copy">
+              <span id="sellerType" class="eyebrow">Computer seller</span>
+              <h2 id="itemName">Pick a listing</h2>
+              <p id="itemPitch">Choose a used item, rotate it, and decide whether the hidden reference price is higher than the seller's ask.</p>
+              <div class="price-row">
+                <span>Ask</span>
+                <strong id="askPrice">₩0</strong>
+                <span>Reference</span>
+                <strong class="mystery">Hidden</strong>
+              </div>
+              <div id="clueList" class="clue-list" aria-live="polite"></div>
+              <div id="resultLog" class="result-log">No trades yet.</div>
+              <div class="button-row">
+                <button id="buyButton"><i data-lucide="shopping-bag"></i> Buy and travel</button>
+                <button id="postponeButton" class="ghost"><i data-lucide="clock"></i> Postpone</button>
+                <button id="walkAwayButton" class="quiet"><i data-lucide="x"></i> Walk away</button>
+              </div>
+            </div>
+
+            <div class="object-zone">
+              <div id="itemViewport" class="item-viewport" aria-label="3D item inspection viewport"></div>
+              <div class="object-toolbar" aria-label="3D controls">
+                <button id="rotateLeftButton" class="icon-button" title="Rotate left" aria-label="Rotate left">
+                  <i data-lucide="rotate-ccw"></i>
+                </button>
+                <button id="rotateRightButton" class="icon-button" title="Rotate right" aria-label="Rotate right">
+                  <i data-lucide="rotate-cw"></i>
+                </button>
+                <button id="inspectButton" class="icon-button" title="Inspect surface" aria-label="Inspect surface">
+                  <i data-lucide="scan-eye"></i>
+                </button>
+              </div>
+              <img class="trade-reference" src="assets/trade-panel.webp" alt="Trade screen concept art" />
+            </div>
+          </section>
+        </section>
+
+        <section id="routeScreen" class="screen screen-route" aria-label="Route screen">
+          <div id="routeViewport" class="route-viewport"></div>
+          <div class="route-hud">
+            <div>
+              <span class="eyebrow">Trading location</span>
+              <strong id="routeTitle">Jeoncheon Station Exit 2</strong>
+            </div>
+            <div class="route-meter">
+              <span id="distanceLabel">0m</span>
+              <progress id="routeProgress" max="100" value="0"></progress>
+            </div>
+            <button id="routeChatButton" class="icon-button" title="Open seller chat" aria-label="Open seller chat">
+              <i data-lucide="message-circle"></i>
+            </button>
+          </div>
+          <div id="anomalyBanner" class="anomaly-banner hidden">
+            <i data-lucide="triangle-alert"></i>
+            <span id="anomalyText">Something is wrong.</span>
+          </div>
+          <div class="route-controls">
+            <button id="turnLeftButton" class="icon-button" title="Turn left" aria-label="Turn left">
+              <i data-lucide="undo-2"></i>
+            </button>
+            <button id="forwardButton"><i data-lucide="footprints"></i> Forward</button>
+            <button id="backHomeButton"><i data-lucide="home"></i> Back home</button>
+            <button id="turnRightButton" class="icon-button" title="Turn right" aria-label="Turn right">
+              <i data-lucide="redo-2"></i>
+            </button>
+          </div>
+          <div id="routeLog" class="route-log">Follow the path. If the world contradicts itself, return home.</div>
+        </section>
+
+        <section id="shopScreen" class="shop-band" aria-label="Upgrade shop">
+          <div class="section-title">
+            <h2>Spend Profit</h2>
+            <span>Items, clothing, buildings</span>
+          </div>
+          <div id="shopList" class="shop-list"></div>
+        </section>
+      </main>
+
+      <div id="chatModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Seller chat">
+        <div class="phone-panel">
+          <div class="phone-header">
+            <span id="chatName">Seller</span>
+            <button id="closeChatButton" class="icon-button" title="Close chat" aria-label="Close chat">
+              <i data-lucide="x"></i>
+            </button>
+          </div>
+          <div id="chatMessages" class="chat-messages"></div>
+          <div class="phone-actions">
+            <button id="cancelTradeButton" class="danger"><i data-lucide="ban"></i> Cancel trade</button>
+            <button id="chatPostponeButton"><i data-lucide="clock"></i> Postpone</button>
+            <button id="continueTradeButton" class="ghost"><i data-lucide="message-square-reply"></i> Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="endingModal" class="ending-modal hidden" role="dialog" aria-modal="true" aria-label="Ending">
+        <img id="endingImage" src="assets/bad-ending.webp" alt="Bad ending illustration" />
+        <div class="ending-copy">
+          <span id="endingKicker" class="eyebrow">Bad ending</span>
+          <h2 id="endingTitle">The wrong street kept walking.</h2>
+          <p id="endingText">An anomalous trade found you before you found profit.</p>
+          <button id="restartButton"><i data-lucide="refresh-cw"></i> Restart</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
